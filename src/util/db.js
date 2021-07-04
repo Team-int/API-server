@@ -20,7 +20,7 @@ module.exports = {
     module.exports.db.stock = DBServer.db('intbot').collection('stock')
     module.exports.db.data = DBServer.db('intbot').collection('secrets')
     
-    console.log(`[Databas] Connected`)
+    console.log(`[Databasㄷ] Connected`)
   },
   db: {},
 }
