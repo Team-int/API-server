@@ -6,9 +6,8 @@
   "author": "Madegod <anhgerelanhaa87@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "cors": "^2.8.5",
     "dotenv": "^10.0.0",
-    "express": "^4.17.1",
+    "fastify": "^3.18.1",
     "mongodb": "^3.6.9",
     "morgan": "^1.10.0",
     "node-fetch": "^2.6.1",

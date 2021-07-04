@@ -1,23 +1,37 @@
-const express = require('express');
-const logger = require('morgan');
-const app = express();
-
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-
-let Router = require('./routes');
+const db = require('./util/db')
+const app = require('fastify').default({
+	logger: true,
+})
 
 
-app.use('/v1', Router.v1);
+db.connect().then(() => {
+	app.get('/v1/stock/:code', async (req, reply) => {
+		reply.header('Access-Control-Allow-Origin', '*')
+		const { code } = req.params
+	
+		if (!code)
+			reply.status(404).send({
+				code: 404,
+				message: 'Not found.'
+			})
+		const stock = await db.db.stock.findOne({code})
+		if (!stock)
+			reply.status(404).send({
+				code: 404,
+				message: 'Not found.'
+			})
 
-app.get('/', async (req, res) =>{
-	res.send({
-		code: 200,
-		message: 'Hello, World'
+		return stock
 	})
-});
-
-app.listen(3000, () => {
-  console.log(`[Team Int] Joined to API Server`)
+	
+	app.get('/', async (req, reply) =>{
+		reply.status(200)
+		return {
+			message: 'Good'
+		}
+	})
+	
+	app.listen(4000, () => {
+	  console.log(`[Team Int] Joined to API Server`)
+	})
 })
