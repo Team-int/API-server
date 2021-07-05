@@ -5,7 +5,7 @@ const app = require('fastify').default({
 
 
 db.connect().then(() => {
-	app.get('/v1/stock/:code', async (req, reply) => {
+	app.get('/intbot/v1/stock/:code', async (req, reply) => {
 		reply.header('Access-Control-Allow-Origin', '*')
 		const { code } = req.params
 	
@@ -27,11 +27,11 @@ db.connect().then(() => {
 	app.get('/', async (req, reply) =>{
 		reply.status(200)
 		return {
-			message: 'Good'
+			status: 'Good'
 		}
 	})
 	
-	app.listen(4000, () => {
+	app.listen(3000, () => {
 	  console.log(`[Team Int] Joined to API Server`)
 	})
 })
