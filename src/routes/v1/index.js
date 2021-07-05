@@ -1,12 +1,12 @@
-const routes =
+const stockRoute = require('./stock')
+
 /**
- * 
- * @param {import('fastify').FastifyInstance} fastify 
- * @param {*} options 
+ * @type {import('fastify').FastifyPluginCallback}
  */
-async (fastify, options) => {
-    fastify.get('/stock', require('./stock'))
-    fastify.get('/stock/:code', require('./stock/[code]'))
+const routes = async (fastify, opts, done) => {
+    fastify.register(stockRoute, { prefix: '/stock' })
+
+    done()
 }
   
 module.exports = routes
