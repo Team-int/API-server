@@ -3,35 +3,13 @@ const app = require('fastify').default({
 	logger: true,
 })
 
-
 db.connect().then(() => {
-	app.get('/v1/stock/:code', async (req, reply) => {
-		reply.header('Access-Control-Allow-Origin', '*')
-		const { code } = req.params
+	app.register(require('fastify-cors'))
+	app.register(require('./routes/v1'), {prefix: '/v1'})
+	app.register(require('./routes/v2'), {prefix: '/v2'})
 	
-		if (!code)
-			reply.status(404).send({
-				code: 404,
-				message: 'Not found.'
-			})
-		const stock = await db.db.stock.findOne({code})
-		if (!stock)
-			reply.status(404).send({
-				code: 404,
-				message: 'Not found.'
-			})
-
-		return stock
-	})
-	
-	app.get('/', async (req, reply) =>{
-		reply.status(200)
-		return {
-			message: 'Good'
-		}
-	})
-	
-	app.listen(4000, () => {
-	  console.log(`[Team Int] Joined to API Server`)
+	app.listen(4000, (err, addr) => {
+		if (err)	throw err
+	  console.log(`[Team Int] Joined to API Server`, addr)
 	})
 })
