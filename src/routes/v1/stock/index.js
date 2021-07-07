@@ -1,4 +1,4 @@
-const { db } = require('../../util/db')
+const { db } = require('../../../util/db')
 
 /**
  * @type {import('fastify').FastifyPluginCallback}
