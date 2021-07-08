@@ -1,7 +1,7 @@
 {
   "name": "API-server",
   "version": "1.0.0",
-  "main": "scr/index.js",
+  "main": "src/index.js",
   "repository": "https://github.com/Team-int/API-server",
   "author": "Madegod <anhgerelanhaa87@gmail.com>",
   "license": "MIT",
