@@ -4,6 +4,8 @@ const { db } = require('../../../util/db')
  * @type {import('fastify').FastifyPluginCallback}
  */
  const stockRoute = async (fastify, opts, done) => {
+    fastify.register(require('./user/'), { prefix: '/user' })
+
     fastify.get('/', async (req, res) =>{ 
         const stock = await db.stock.find().toArray()
 
